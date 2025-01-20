@@ -1,3 +1,5 @@
+import 'package:image_picker/image_picker.dart';
+import 'dart:io'; // Potrzebne do pracy z plikami
 import 'package:flutter/material.dart';
 import 'screens/items_screen.dart';
 
@@ -15,3 +17,4 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+

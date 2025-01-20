@@ -15,15 +15,18 @@ router.register('sales', SaleViewSet)
 router.register('transactions', TransactionViewSet)
 router.register('jars', JarViewSet)
 
-urlpatterns = router.urls
+
 
 from django.contrib import admin
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView, SpectacularRedocView
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    #router.urls,
+    #path('admin/', admin.site.urls),
     #path('api/', include('api.urls')),  # Include your app's URLs
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),  # OpenAPI Schema
     path('api/docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),  # Swagger UI
     path('api/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),  # Redoc UI
 ]
+
+urlpatterns += router.urls

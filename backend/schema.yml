@@ -1,0 +1,68 @@
+openapi: 3.0.2
+info:
+  title: ''
+  version: ''
+paths:
+  /api/api/schema/:
+    get:
+      operationId: listSpectaculars
+      description: 'OpenApi3 schema for this API. Format can be selected via content
+        negotiation.
+
+
+        - YAML: application/vnd.oai.openapi
+
+        - JSON: application/vnd.oai.openapi+json'
+      parameters: []
+      responses:
+        '200':
+          content:
+            application/vnd.oai.openapi:
+              schema:
+                type: array
+                items: {}
+            application/yaml:
+              schema:
+                type: array
+                items: {}
+            application/vnd.oai.openapi+json:
+              schema:
+                type: array
+                items: {}
+            application/json:
+              schema:
+                type: array
+                items: {}
+          description: ''
+      tags:
+      - api
+  /api/api/docs/:
+    get:
+      operationId: listSpectacularSwaggers
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            text/html:
+              schema:
+                type: array
+                items: {}
+          description: ''
+      tags:
+      - api
+  /api/api/redoc/:
+    get:
+      operationId: listSpectacularRedocs
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          content:
+            text/html:
+              schema:
+                type: array
+                items: {}
+          description: ''
+      tags:
+      - api
