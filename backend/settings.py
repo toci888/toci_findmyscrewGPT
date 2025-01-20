@@ -9,6 +9,7 @@ INSTALLED_APPS = [
     'drf_yasg',
     'api',
     'corsheaders',
+    'drf_spectacular',
 ]
 
 MIDDLEWARE = [
@@ -28,3 +29,15 @@ DATABASES = {
 }
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+REST_FRAMEWORK = {
+ 
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'FindMyScrew API',
+    'DESCRIPTION': 'API documentation for the FindMyScrew project.',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,  # This prevents the schema from being included in the Swagger UI.
+}

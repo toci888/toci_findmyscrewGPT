@@ -8,6 +8,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_yasg',
     'api',
+    'drf_spectacular',
 ]
 
 DATABASES = {
@@ -19,4 +20,16 @@ DATABASES = {
         'HOST': 'localhost',         # Adres hosta
         'PORT': '5432',              # Port PostgreSQL (domyślnie 5432)
     }
+}
+
+REST_FRAMEWORK = {
+ 
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'FindMyScrew API',
+    'DESCRIPTION': 'API documentation for the FindMyScrew project.',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,  # This prevents the schema from being included in the Swagger UI.
 }
