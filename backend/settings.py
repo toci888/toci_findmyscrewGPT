@@ -8,6 +8,12 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_yasg',
     'api',
+    'corsheaders',
+]
+
+MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 DATABASES = {
@@ -20,3 +26,5 @@ DATABASES = {
         'PORT': '5432',              # Port PostgreSQL (domyślnie 5432)
     }
 }
+
+CORS_ALLOW_ALL_ORIGINS = True
