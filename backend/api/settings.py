@@ -9,6 +9,8 @@ INSTALLED_APPS = [
     'drf_yasg',
     'api',
     'drf_spectacular',
+    'rest_framework',
+
 ]
 
 DATABASES = {

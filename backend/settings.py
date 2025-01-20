@@ -10,6 +10,8 @@ INSTALLED_APPS = [
     'api',
     'corsheaders',
     'drf_spectacular',
+    'rest_framework',
+
 ]
 
 MIDDLEWARE = [
