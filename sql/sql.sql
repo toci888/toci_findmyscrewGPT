@@ -3,6 +3,7 @@ DROP VIEW IF EXISTS item_images CASCADE;
 DROP VIEW IF EXISTS active_sales CASCADE;
 
 -- Drop tables if they exist
+DROP TABLE IF EXISTS jars CASCADE;
 DROP TABLE IF EXISTS transactions CASCADE;
 DROP TABLE IF EXISTS sales CASCADE;
 DROP TABLE IF EXISTS item_tags CASCADE;
@@ -67,6 +68,17 @@ CREATE TABLE transactions (
     buyer_contact TEXT,
     transaction_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TABLE jars (
+    jar_id SERIAL PRIMARY KEY,
+    shelf INT NOT NULL,
+    description TEXT,
+    content_type VARCHAR(50),
+    weight_grams INT,
+    is_empty BOOLEAN DEFAULT FALSE,
+    added_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 -- Sample views
 CREATE VIEW user_items AS
 SELECT 
@@ -237,3 +249,113 @@ INSERT INTO images (item_id, image_url, uploaded_at) VALUES
 (2, '20250120_070559.jpg', CURRENT_TIMESTAMP),
 (3, '20250120_070559.jpg', CURRENT_TIMESTAMP),
 (4, '20250120_070559.jpg', CURRENT_TIMESTAMP);
+
+
+-- Dodanie nowej kategorii
+INSERT INTO categories (name, description) VALUES
+('Sport i podróże', 'Torby, plecaki oraz akcesoria podróżne i sportowe.');
+
+-- Dodanie przedmiotu
+INSERT INTO items (user_id, category_id, name, description, created_at) VALUES
+(1, (SELECT category_id FROM categories WHERE name = 'Sport i podróże'), 
+'Czarna torba sportowa', 
+'Duża torba sportowa z kilkoma zamkami błyskawicznymi i rączkami, idealna na wyjazdy lub treningi.', 
+CURRENT_TIMESTAMP);
+
+-- Dodanie zdjęcia dla przedmiotu
+INSERT INTO images (item_id, image_url, uploaded_at) VALUES
+((SELECT item_id FROM items WHERE name = 'Czarna torba sportowa'), 
+'20250120_070519.jpg', 
+CURRENT_TIMESTAMP);
+
+-- Dodanie nowej kategorii dla materiałów budowlanych
+INSERT INTO categories (name, description) VALUES
+('Materiały budowlane', 'Produkty do remontów i budowy, takie jak gips, cement, farby.');
+
+-- Dodanie przedmiotu do katalogu
+INSERT INTO items (user_id, category_id, name, description, created_at) VALUES
+(1, (SELECT category_id FROM categories WHERE name = 'Materiały budowlane'), 
+'Worki z materiałami budowlanymi', 
+'Dwa worki: jeden plastikowy, prawdopodobnie zawierający odpady, oraz worek z gipsowym tynkiem MP 75.', 
+CURRENT_TIMESTAMP);
+
+-- Dodanie zdjęcia przedmiotu
+INSERT INTO images (item_id, image_url, uploaded_at) VALUES
+((SELECT item_id FROM items WHERE name = 'Worki z materiałami budowlanymi'), 
+'20250120_070329.jpg', 
+CURRENT_TIMESTAMP);
+
+
+--jars
+INSERT INTO jars (shelf, description, content_type, weight_grams, is_empty) VALUES
+(1, 'Słoik z ogórkami kiszonymi', 'Ogórki', 1200, FALSE),
+(1, 'Słoik z olejem kokosowym', 'Olej kokosowy', 500, FALSE),
+(1, 'Pusty słoik', NULL, 0, TRUE),
+(2, 'Słoik z keczupem', 'Keczup', 700, FALSE),
+(2, 'Słoik z przetworami owocowymi', 'Dżem truskawkowy', 400, FALSE),
+(2, 'Pusty słoik z zakrętką czerwoną', NULL, 0, TRUE),
+(3, 'Duży pusty słoik', NULL, 0, TRUE),
+(3, 'Średni pusty słoik', NULL, 0, TRUE),
+(3, 'Mały pusty słoik', NULL, 0, TRUE);
+
+INSERT INTO jars (shelf, description, content_type, weight_grams, is_empty)
+VALUES
+(1, 'Korniszony w słoiku', 'Ogórki kiszone', 720, FALSE),
+(1, 'Słoik oleju kokosowego', 'Olej kokosowy', 500, FALSE),
+(1, 'Marynowana papryka w słoiku', 'Papryka marynowana', 300, FALSE),
+(1, 'Słoik z dżemem wiśniowym', 'Dżem wiśniowy', 330, FALSE),
+(2, 'Słoik miodu wielokwiatowego', 'Miód', 900, FALSE),
+(2, 'Słoik z ketchupem łagodnym', 'Ketchup', 500, FALSE),
+(2, 'Marynowana dynia w dużym słoiku', 'Dynia marynowana', 1000, FALSE),
+(2, 'Słoik z ogórkami kwaszonymi', 'Ogórki kwaszone', 720, FALSE),
+(2, 'Słoik przecieru pomidorowego', 'Przecier pomidorowy', 700, FALSE),
+(2, 'Słoik z piklami warzywnymi', 'Pikle', 500, FALSE);
+
+INSERT INTO items (user_id, category_id, name, description, created_at)
+VALUES 
+(1, 3, 'Panele podłogowe', 'Stos paneli podłogowych w jasnym odcieniu drewna, pozostałość po remoncie.', CURRENT_TIMESTAMP);
+
+INSERT INTO items (user_id, category_id, name, description, created_at)
+VALUES 
+(1, 4, 'Wiaderko Ultra Biel', 'Wiaderko farby Ultra Biel do ścian i sufitów, częściowo zużyte.', CURRENT_TIMESTAMP),
+(1, 5, 'Para starych butów', 'Czarne, lekko zużyte buty sportowe, potencjalnie przydatne do pracy.', CURRENT_TIMESTAMP),
+(1, 6, 'Reklamówka z zawartością', 'Biała reklamówka z nieznaną zawartością, może zawierać drobne przedmioty.', CURRENT_TIMESTAMP);
+
+INSERT INTO items (user_id, category_id, name, description, created_at)
+VALUES 
+(1, 7, 'Stare koła rowerowe', 'Dwa stare koła rowerowe z oponami, jedno z odblaskiem.', CURRENT_TIMESTAMP),
+(1, 8, 'Metalowy garnek', 'Duży, metalowy garnek z plastikowymi uchwytami.', CURRENT_TIMESTAMP),
+(1, 9, 'Poduszka z gąbki', 'Duża poduszka z gąbki, potencjalnie używana jako materiał izolacyjny.', CURRENT_TIMESTAMP),
+(1, 10, 'Doniczka gliniana', 'Mała, okrągła doniczka wykonana z gliny.', CURRENT_TIMESTAMP),
+(1, 10, 'Czerwona konewka', 'Plastikowa konewka w kolorze czerwonym, lekko używana.', CURRENT_TIMESTAMP),
+(1, 10, 'Spray techniczny', 'Puszka ze sprayem technicznym, przeznaczenie bliżej nieokreślone.', CURRENT_TIMESTAMP);
+
+INSERT INTO items (user_id, category_id, name, description, created_at)
+VALUES 
+(1, 7, 'Rura rowerowa', 'Stara rura rowerowa w plastikowej donicy.', CURRENT_TIMESTAMP),
+(1, 9, 'Czerwona donica', 'Plastikowa, czerwona donica średniej wielkości.', CURRENT_TIMESTAMP),
+(1, 8, 'Puszka sprayu technicznego', 'Spray techniczny w puszce marki Motip.', CURRENT_TIMESTAMP),
+(1, 10, 'Sprężone powietrze', 'Duża niebieska puszka ze sprężonym powietrzem, używana do czyszczenia.', CURRENT_TIMESTAMP);
+
+
+INSERT INTO items (user_id, category_id, name, description, created_at)
+VALUES 
+(1, 9, 'Koła rowerowe', 'Trzy zużyte koła rowerowe z widocznymi szprychami, powieszone na ścianie.', CURRENT_TIMESTAMP),
+(1, 10, 'Karton po telewizorze', 'Duży karton po telewizorze LED 43-calowym, używany do przechowywania.', CURRENT_TIMESTAMP),
+(1, 10, 'Worek z materiałami', 'Przezroczysty worek z nieokreślonymi materiałami, możliwe tekstylia.', CURRENT_TIMESTAMP),
+(1, 10, 'Karton po sprzęcie', 'Karton po urządzeniu Mini Oil Pressing Machine.', CURRENT_TIMESTAMP);
+
+-- INSERT INTO categories (name, description) VALUES
+-- ('Książki techniczne', 'Literatura z zakresu techniki i programowania'),
+-- ('AGD i kuchnia', 'Akcesoria kuchenne, garnki i sprzęty AGD'),
+-- ('Materiały budowlane', 'Produkty remontowe i budowlane'),
+-- ('Sport i rowery', 'Akcesoria sportowe oraz części rowerowe'),
+-- ('Dom i ogród', 'Wyposażenie domu i ogrodu'),
+-- ('Inne', 'Pozostałe przedmioty');
+
+-- Seed użytkowników
+INSERT INTO users (username, email, password_hash) VALUES
+('lemiesz', 'lemiesz@example.com', 'hash1'),
+('seba', 'seba@example.com', 'hash2'),
+('kamil', 'kamil@example.com', 'hash3'),
+('michal', 'michal@example.com', 'hash4');
