@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Profesjonalne usługi sprzątania, porządkowania i odgruzowywania piwnic, warsztatów oraz garaży na terenie całej Polski. Posprzątamy, zabierzemy zbędne cenne graty i zaproponujemy rozsądną cenę!">
+    <meta name="keywords" content="sprzątanie piwnic, odgruzowywanie garaży, porządkowanie warsztatów, usługi sprzątania, Polska">
+    <meta name="author" content="FindMyScrew.pl">
+    <title>FindMyScrew - Sprzątanie Piwnic, Warsztatów i Garaży</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="js/contactForm.js"></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>FindMyScrew</h1>
+            <p>Profesjonalne sprzątanie i odgruzowywanie na terenie całej Polski</p>
+        </div>
+    </header>
+
+    <main>
+        <section id="about">
+            <div class="container">
+                <h2>Dlaczego warto wybrać nasze usługi?</h2>
+                <p>
+                    Specjalizujemy się w sprzątaniu, porządkowaniu oraz odgruzowywaniu piwnic, warsztatów i garaży. Oferujemy kompleksowe usługi, 
+                    w tym wywóz zbędnych gratów, ocenę wartościowych przedmiotów oraz porządek w Twoim miejscu pracy czy przechowywania.
+                </p>
+                <ul>
+                    <li>Usługi na terenie całej Polski</li>
+                    <li>Profesjonalny i szybki serwis</li>
+                    <li>Rozsądne ceny dostosowane do Twoich potrzeb</li>
+                    <li>Utylizacja odpadów i recykling</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="services">
+            <div class="container">
+                <h2>Nasze usługi</h2>
+                <div class="service">
+                    <h3>Sprzątanie Piwnic</h3>
+                    <p>Przywrócimy porządek w Twojej piwnicy, usuniemy zbędne rzeczy i stworzymy dodatkową przestrzeń.</p>
+                </div>
+                <div class="service">
+                    <h3>Odgruzowywanie Garaży</h3>
+                    <p>Zorganizujemy Twój garaż, usuniemy niepotrzebne graty i ułatwimy Ci przechowywanie ważnych przedmiotów.</p>
+                </div>
+                <div class="service">
+                    <h3>Porządkowanie Warsztatów</h3>
+                    <p>Posprzątamy Twój warsztat, aby stał się miejscem sprzyjającym efektywnej pracy.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="container">
+                <h2>Skontaktuj się z nami</h2>
+                <p>Chcesz dowiedzieć się więcej? Skontaktuj się z nami już dziś, aby otrzymać darmową wycenę!</p>
+                <form action="php/contact.php" method="POST">
+                    <label for="name">Imię i nazwisko:</label>
+                    <input type="text" id="name" name="name" required>
+                
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required>
+                
+                    <label for="phone">Numer telefonu:</label>
+                    <input type="tel" id="phone" name="phone" pattern="[0-9+ ]{9,15}" required>
+                    <small>Format: 123456789 lub +48 123 456 789</small>
+                
+                    <label for="city">Miejscowość:</label>
+                    <input type="text" id="city" name="city" required>
+                
+                    <label for="message">Wiadomość:</label>
+                    <textarea id="message" name="message" rows="4" required></textarea>
+                
+                    <button type="submit">Wyślij</button>
+                </form>
+                
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 FindMyScrew.pl - Wszystkie prawa zastrzeżone.</p>
+            <p>Email: <a href="mailto:kontakt@findmyscrew.pl">kontakt@findmyscrew.pl</a> | Telefon: 123 456 789</p>
+        </div>
+    </footer>
+</body>
+</html>

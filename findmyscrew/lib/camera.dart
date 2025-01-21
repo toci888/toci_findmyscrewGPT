@@ -26,8 +26,8 @@ class _CameraScreenState extends State<CameraScreen> {
   Future<void> _pickImage() async {
     final pickedFile = await ImagePicker().pickImage(
       source: ImageSource.camera, // Źródło: aparat
-      maxWidth: 600,             // Opcjonalne: zmiana rozmiaru zdjęcia
-      imageQuality: 80,          // Opcjonalne: jakość zdjęcia (0-100)
+      maxWidth: 1200,             // Opcjonalne: zmiana rozmiaru zdjęcia
+      imageQuality: 100,          // Opcjonalne: jakość zdjęcia (0-100)
     );
 
     if (pickedFile != null) {

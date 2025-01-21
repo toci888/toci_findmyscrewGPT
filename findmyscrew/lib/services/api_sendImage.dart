@@ -1,29 +1,8 @@
-// import 'package:image_picker/image_picker.dart';
-// import 'dart:io'; // Potrzebne do pracy z plikami
-// import 'package:flutter/material.dart';
-// import 'screens/items_screen.dart';
-// import 'package:google_mobile_ads/google_mobile_ads.dart';
-
-// void main() {
-//   WidgetsFlutterBinding.ensureInitialized();
-//   MobileAds.instance.initialize(); // Inicjalizacja SDK
-//   runApp(MyApp());
-// }
-
-// class MyApp extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       title: 'FindMyScrew',
-//       theme: ThemeData(primarySwatch: Colors.blue),
-//       home: ItemsScreen(),
-//     );
-//   }
-// }
-
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'dart:io';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 void main() {
   runApp(MyApp());
@@ -47,6 +26,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   File? _image;
   final ImagePicker _picker = ImagePicker();
+  String? _response;
 
   Future<void> _takePhoto() async {
     final XFile? photo = await _picker.pickImage(source: ImageSource.camera);
@@ -54,6 +34,36 @@ class _HomePageState extends State<HomePage> {
     if (photo != null) {
       setState(() {
         _image = File(photo.path);
+      });
+
+      await _uploadPhoto(_image!);
+    }
+  }
+
+  Future<void> _uploadPhoto(File image) async {
+    final uri = Uri.parse('https://your-backend-url.com/api/upload');
+    final request = http.MultipartRequest('POST', uri);
+
+    request.files.add(
+      await http.MultipartFile.fromPath('file', image.path),
+    );
+
+    try {
+      final response = await request.send();
+
+      if (response.statusCode == 200) {
+        final respStr = await response.stream.bytesToString();
+        setState(() {
+          _response = json.decode(respStr)['message'];
+        });
+      } else {
+        setState(() {
+          _response = 'Błąd serwera: ${response.statusCode}';
+        });
+      }
+    } catch (e) {
+      setState(() {
+        _response = 'Błąd połączenia: $e';
       });
     }
   }
@@ -84,6 +94,13 @@ class _HomePageState extends State<HomePage> {
               onPressed: _takePhoto,
               child: Text('Zrób zdjęcie'),
             ),
+            SizedBox(height: 20),
+            _response != null
+                ? Text(
+                    'Odpowiedź serwera: $_response',
+                    textAlign: TextAlign.center,
+                  )
+                : Container(),
           ],
         ),
       ),

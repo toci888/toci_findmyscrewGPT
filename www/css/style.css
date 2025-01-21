@@ -1,0 +1,129 @@
+/* Global Styles */
+body {
+    font-family: 'Monotype Corsiva', 'Times New Roman', serif;
+    background-color: #f5f5dc; /* Light beige background for vintage look */
+    color: #4b3832; /* Deep brown for text */
+    margin: 0;
+    padding: 0;
+    line-height: 1.8;
+    text-align: center; /* Center all text */
+}
+
+h1, h2, h3 {
+    color: #3c2f2f; /* Dark brown for headings */
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 3em; /* Large, easy-to-read title */
+    text-shadow: 2px 2px #e0d5c0; /* Subtle shadow for vintage effect */
+}
+
+h2, h3 {
+    font-size: 2.2em;
+}
+
+a {
+    color: #8b5e34; /* Warm brown for links */
+    text-decoration: none;
+    font-size: 1.5em; /* Larger links */
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #a66a3f;
+}
+
+/* Form Styling */
+form {
+    background-color: #fff8dc; /* Light cream background */
+    border: 2px solid #4b3832; /* Deep brown border */
+    border-radius: 10px;
+    padding: 30px;
+    max-width: 600px;
+    margin: 20px auto; /* Center form on the page */
+    box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+form label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 12px;
+    color: #4b3832;
+    font-size: 1.8em; /* Larger labels for better visibility */
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="tel"],
+form textarea {
+    font-family: 'Monotype Corsiva', 'Times New Roman', serif;
+    width: 95%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 2px solid #4b3832;
+    border-radius: 10px;
+    box-shadow: inset 2px 2px 6px rgba(0, 0, 0, 0.1);
+    background-color: #fff8dc; /* Matching form background */
+    color: #4b3832;
+    font-size: 1.5em; /* Easy-to-read text size */
+}
+
+form textarea {
+    resize: none;
+}
+
+form button {
+    background-color: #8b5e34;
+    color: #fff8dc;
+    font-size: 1.8em; /* Bigger button text */
+    padding: 15px 30px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+    display: block;
+    width: 100%; /* Button stretches across the form */
+}
+
+form button:hover {
+    background-color: #a66a3f;
+}
+
+/* Footer Styling */
+footer {
+    background-color: #4b3832;
+    color: #fff8dc;
+    text-align: center;
+    padding: 15px 0;
+    margin-top: 20px;
+    font-size: 1.5em;
+}
+
+footer a {
+    color: #fff8dc;
+    text-decoration: underline;
+}
+
+/* Utility Classes */
+.text-center {
+    text-align: center;
+}
+
+.mt-20 {
+    margin-top: 20px;
+}
+
+.mb-20 {
+    margin-bottom: 20px;
+}
+
+/* Increase text readability for all sections */
+p, ul, li {
+    font-size: 1.8em;
+    line-height: 1.8;
+    color: #4b3832;
+    margin: 10px 0;
+}
