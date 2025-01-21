@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $mail->Host = 'serwer2461761.home.pl'; // Wstaw adres serwera SMTP
         $mail->SMTPAuth = true;
         $mail->Username = 'warrior@toci.pl'; // Wstaw swój adres email
-        $mail->Password = 'ABY83beatka!@#'; // Wstaw swoje hasło
+        $mail->Password = ''; // Wstaw swoje hasło
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
 
