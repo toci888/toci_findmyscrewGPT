@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import User, Category, Item, Image, ItemTag, Sale, Transaction, Jar
+from .models import Image
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -42,4 +43,11 @@ class TransactionSerializer(serializers.ModelSerializer):
 class JarSerializer(serializers.ModelSerializer):
     class Meta:
         model = Jar
+        fields = '__all__'
+
+
+
+class PhotoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Image
         fields = '__all__'

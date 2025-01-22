@@ -11,7 +11,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'drf_spectacular',
     'rest_framework',
-
+    'photos',
 ]
 
 MIDDLEWARE = [
@@ -46,3 +46,14 @@ SPECTACULAR_SETTINGS = {
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+import os
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Dodaj MEDIA_URL do `urls.py` projektu
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
