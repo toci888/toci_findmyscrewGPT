@@ -4,3 +4,6 @@ python manage.py migrate
 
 
 curl -X POST -F "title=Zdjęcie piwnicy" -F "image=@/ścieżka/do/zdjęcia.jpg" http://127.0.0.1:8000/api/photos/upload/
+
+pip install openai
+
