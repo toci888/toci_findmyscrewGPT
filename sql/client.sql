@@ -1,0 +1,22 @@
+CREATE TABLE client (
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    email VARCHAR(254) UNIQUE NOT NULL,
+    phone_number VARCHAR(15) NOT NULL,
+    street_address VARCHAR(255) NOT NULL,
+    city VARCHAR(100) NOT NULL,
+    postal_code VARCHAR(10) NOT NULL,
+    account_number VARCHAR(34) UNIQUE NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW()
+);
+
+CREATE TABLE client_transaction (
+    id SERIAL PRIMARY KEY,
+    client_id INTEGER NOT NULL REFERENCES client(id) ON DELETE CASCADE,
+    amount NUMERIC(10, 2) NOT NULL,
+    status VARCHAR(10) DEFAULT 'PENDING' NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW() NOT NULL,
+    completed_at TIMESTAMP WITH TIME ZONE
+);

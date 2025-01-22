@@ -1,5 +1,11 @@
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
+class PaymentStatus(models.TextChoices):
+    PENDING = 'PENDING', _('Oczekujące')
+    COMPLETED = 'COMPLETED', _('Zakończone')
+    FAILED = 'FAILED', _('Niepowodzenie')
+    
 class User(models.Model):
     username = models.CharField(max_length=50)
     email = models.EmailField(unique=True)
@@ -66,3 +72,28 @@ class Jar(models.Model):
 
 
 # Create your models here.
+
+class Client(models.Model):
+    first_name = models.CharField(max_length=50)  # Imię klienta
+    last_name = models.CharField(max_length=50)   # Nazwisko klienta
+    email = models.EmailField(unique=True)        # E-mail
+    phone_number = models.CharField(max_length=15)  # Numer telefonu
+    street_address = models.CharField(max_length=255)  # Ulica i numer
+    city = models.CharField(max_length=100)       # Miasto
+    postal_code = models.CharField(max_length=10) # Kod pocztowy
+    account_number = models.CharField(max_length=34, unique=True)  # Numer konta bankowego
+    created_at = models.DateTimeField(auto_now_add=True)  # Data utworzenia rekordu
+    updated_at = models.DateTimeField(auto_now=True)      # Data ostatniej aktualizacji
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name} - {self.email}"
+
+class Client_Transaction(models.Model):
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name="transactions")
+    amount = models.DecimalField(max_digits=10, decimal_places=2)  # Kwota przelewu
+    status = models.CharField(max_length=10, choices=PaymentStatus.choices, default=PaymentStatus.PENDING)
+    created_at = models.DateTimeField(auto_now_add=True)  # Data utworzenia transakcji
+    completed_at = models.DateTimeField(null=True, blank=True)  # Data zakończenia transakcji
+
+    def __str__(self):
+        return f"Transakcja dla {self.client.first_name} {self.client.last_name}: {self.amount} PLN ({self.status})"

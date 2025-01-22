@@ -24,7 +24,7 @@ urlpatterns = [
     #router.urls,
     #path('admin/', admin.site.urls),
     #path('api/', include('api.urls')),  # Include your app's URLs
-    path('api/photos/', include('photos.urls')),
+  ##  path('api/photos/', include('photos.urls')),
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),  # OpenAPI Schema
     path('api/docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),  # Swagger UI
     path('api/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),  # Redoc UI
