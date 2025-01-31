@@ -4,6 +4,9 @@ from .views import (
     UserViewSet, CategoryViewSet, ItemViewSet, ImageViewSet,
     ItemTagViewSet, SaleViewSet, TransactionViewSet, JarViewSet
 )
+from .views import ImageUploadView
+from django.conf import settings
+from django.conf.urls.static import static
 
 router = DefaultRouter()
 router.register('users', UserViewSet)
@@ -28,6 +31,8 @@ urlpatterns = [
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),  # OpenAPI Schema
     path('api/docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),  # Swagger UI
     path('api/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),  # Redoc UI
+    path('upload-image/', ImageUploadView.as_view(), name='upload-image'),
 ]
 
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += router.urls
